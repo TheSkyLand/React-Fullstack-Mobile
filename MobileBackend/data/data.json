@@ -1,0 +1,36 @@
+{
+    "dataTest": [
+        {
+            "id": 0,
+            "name": "100",
+            "age": 1001
+        },
+        {
+            "id": 1,
+            "name": "New",
+            "age": 10
+        },
+        {
+            "id": 2,
+            "name": "Stas",
+            "age": 21
+        },
+        {
+            "id": 3,
+            "name": "II",
+            "age": 10
+        }
+    ],
+    "todoData": [
+        {
+            "id": 1,
+            "title": "Rea",
+            "checked": true
+        },
+        {
+            "id": 2,
+            "title": "Qeeqwr",
+            "checked": false
+        }
+    ]
+}
