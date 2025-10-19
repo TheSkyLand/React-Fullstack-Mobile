@@ -1,5 +1,5 @@
 import { View } from "react-native"
-import ShopHeader from "@/app/src/components/ShopHeader"
+import ShopHeader from "@/app/ShopHeader"
 
 
 const HomePage = () => {

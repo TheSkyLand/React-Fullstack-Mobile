@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import ShopProducts from "@/app/src/components/ShopProducts";
+import ShopProducts from "@/app/ShopProducts";
 
-import { getData, } from "@/app/src/api/controllers/new-controller";
+import { getData, } from "@/app/api/controllers/new-controller";
 
-import { shopDto } from "@/app/src/types/common/data.types";
+import { shopDto } from "@/app/types/common/data.types";
 import { useNavigation, useRoute } from "@react-navigation/native"
-import ShopHeader from "../components/ShopHeader";
-import { View } from "react-native";
+import ShopHeader from "./ShopHeader";
+import { View, Text } from "react-native";
 
 
 type RouteParams = {
@@ -16,9 +16,12 @@ type RouteParams = {
 const ShopPage = () => {
     const navigation = useNavigation();
     const [data, setData] = React.useState<shopDto[]>();
+
     const route = useRoute();
+
     const params = route.params as RouteParams;
     const id = params?.id ? Number(params.id) : undefined;
+
 
     useEffect(() => {
         getData()
@@ -27,6 +30,7 @@ const ShopPage = () => {
             })
             .catch(e => console.log(e));
     }, []);
+
     return (
         <View>
             <ShopHeader />

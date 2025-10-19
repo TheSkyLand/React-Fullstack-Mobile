@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { getCommon } from "@/app/src/api/controllers/new-controller";
+import { getCommon } from "@/app/api/controllers/new-controller";
 import { TouchableOpacity, View } from "react-native";
 import { useNavigation, NavigationProp } from "@react-navigation/native"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { shopDto } from "../types/common/data.types";
+import { shopDto } from "./types/common/data.types";
 
 type RootStackParamList = {
     HomePage: undefined;

@@ -1,10 +1,10 @@
-import { getData, getCommon } from "../api/controllers/new-controller"
+import { getData, getCommon } from "./api/controllers/new-controller"
 import React, { useEffect } from "react"
-import { shopDto } from "../types/common/data.types"
+import { shopDto } from "./types/common/data.types"
 import { TouchableOpacity, View } from "react-native"
 import { useNavigation, NavigationProp } from "@react-navigation/native"
 
-interface ShopProductGoods {
+interface ShopProductProps {
     id: number
     name: string
     cost: number
@@ -18,12 +18,17 @@ type RootStackParamList = {
     ProductAdd: undefined;
     ShopPage: undefined;
     CreateEdit: { id?: number };
-    ProductPage: { id?: number };
+    ProductPage: {id?: number};
 };
 
-const ShopProducts = (props: ShopProductGoods) => {
-const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+const ShopProducts = (props: ShopProductProps) => {
     const [data, setData] = React.useState<shopDto>();
+    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
+        const handlepress = (id : number) => {
+            
+        }
+    
 
     useEffect(() => {
         getCommon()
@@ -33,22 +38,21 @@ const navigation = useNavigation<NavigationProp<RootStackParamList>>();
             })
             .catch((e) => console.log(e));
     }, []);
-    
+
 
     console.log(props.image)
     return <View
     >
-        <TouchableOpacity onPress={() => navigation.navigate("ProductPage", {id: data?.id})}>
+        <TouchableOpacity onPress={() => navigation.navigate("ProductPage", { id: props.id })}>
             <View>
-                <View>{props.name}</View>
-                <View
-
-                >
-
+                <View>
+                    {props.name}
+                    </View>
+                <View>
                 </View>
                 <View
-                >{props.cost} ₽</View>
-                <TouchableOpacity></TouchableOpacity>
+                >{props.cost} ₽
+                </View>
             </View>
         </TouchableOpacity>
     </View>

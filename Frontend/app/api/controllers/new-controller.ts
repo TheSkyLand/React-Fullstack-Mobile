@@ -1,5 +1,5 @@
 import { $api, config } from "../index";
-import { shopDto } from "@/app/src/types/common/data.types";
+import { shopDto } from "@/app/types/common/data.types";
 
 
 export const getCommon = () => {

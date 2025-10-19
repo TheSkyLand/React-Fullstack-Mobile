@@ -1,6 +1,6 @@
-import { shopDto } from "@/app/src/types/common/data.types";
+import { shopDto } from "@/app/types/common/data.types";
 import React, { useEffect } from "react";
-import { getData, deleteDataId } from "@/app/src/api/controllers/new-controller";
+import { getData, deleteDataId } from "@/app/api/controllers/new-controller";
 import { TouchableOpacity, View, Alert } from "react-native";
 import { useNavigation, NavigationProp } from "@react-navigation/native"
 
@@ -10,7 +10,7 @@ type RootStackParamList = {
     ProductAdd: undefined;
     ShopPage: undefined;
     ProductCreate: { id?: number };
-    ProductEdit: { id?: number};
+    CreateEditProduct: { id?: number};
     ProductPage: { id?: number };
 };
 const ProductAdd = () => {
@@ -27,12 +27,12 @@ const ProductAdd = () => {
           image: "",
           id: undefined
         };
-        navigation.navigate("ProductCreate", { id: newItem.id });
+        navigation.navigate("CreateEditProduct", { id: newItem.id });
     };
 
         const handleEdit = (item: shopDto) => {
         if (item.id) {
-            navigation.navigate("ProductEdit", { id: item.id });
+            navigation.navigate("CreateEditProduct", { id: item.id });
         } else {
             Alert.alert('Ошибка', 'ID записи не найден');
         }
@@ -62,7 +62,7 @@ const ProductAdd = () => {
     return <View
     >
         <TouchableOpacity
-            onPress={() => navigation.navigate("ProductAdd")}
+            onPress={handleCreate}
         >
             Создать новую запись
         </TouchableOpacity>
@@ -89,7 +89,7 @@ const ProductAdd = () => {
                         <View
                         >
                             <TouchableOpacity
-                                onPress={() => navigation.navigate("ProductEdit", {id: item.id})}
+                                onPress={() => handleEdit(item)}
                             >
                                 Изменить
                             </TouchableOpacity>

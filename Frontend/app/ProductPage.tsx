@@ -1,8 +1,8 @@
 import React, { useEffect } from "react"
-import { shopDto } from "@/app/src/types/common/data.types"
-import { getData, getDataId } from "@/app/src/api/controllers/new-controller"
-import ShopHeader from "@/app/src/components/ShopHeader"
-import { View } from "react-native"
+import { shopDto } from "@/app/types/common/data.types"
+import { getData, getDataId } from "@/app/api/controllers/new-controller"
+import ShopHeader from "@/app/ShopHeader"
+import { View, Text, Image } from "react-native"
 import { useRoute } from '@react-navigation/native';
 import { useNavigation } from "@react-navigation/native"
 
@@ -34,27 +34,17 @@ const ProductPage = () => {
     return (
         <View>
             <ShopHeader />
-            <View>
-                {data?.id}
-            </View>
-            <View
+            <Text
             >
                 {data?.name}
-            </View>
-            <View
+            </Text>
+            <Text
             >
                 {data?.cost} ₽
-            </View>
-
-            <View
-            >
-            </View>
-            <View>
-                <View>
-                    {data?.info}
-                </View>
-
-            </View>
+            </Text>
+            <Text>
+                {data?.info}
+            </Text>
 
         </View>
     )
