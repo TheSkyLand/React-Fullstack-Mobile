@@ -1,67 +1,39 @@
-import React, { useState, useEffect, useRef } from "react";
-
+import React, { useState, useEffect } from "react";
+import { 
+    TextInput, TouchableOpacity, View, Alert, Text, 
+    StyleSheet, SafeAreaView, ScrollView, KeyboardAvoidingView, Platform 
+} from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { createData, editDataId, getDataId } from "@/app/api/controllers/new-controller"
-import { TextInput, TouchableOpacity, View, Alert, Text } from "react-native";
-
-type RouteParams = {
-    id?: string | number;
-};
-
+import { createData, editDataId, getDataId } from "@/app/api/controllers/new-controller";
+import { ChevronLeft, Save } from "lucide-react-native"; // Иконки
 
 const CreateEditProduct = () => {
     const navigation = useNavigation();
     const route = useRoute();
-
-    const params = route.params as RouteParams;
+    const params = route.params as { id?: string | number };
     const id = params?.id ? Number(params.id) : undefined;
-
 
     const [cost, setCost] = useState('');
     const [name, setName] = useState('');
     const [info, setInfo] = useState('');
-    const [image, setImage] = useState('')
+    const [image, setImage] = useState('');
 
     useEffect(() => {
         if (id && !isNaN(id)) {
-            console.log('Fetching data for ID:', id);
-
             getDataId(id)
                 .then((res) => {
-                    console.log('Response from API:', res);
-                    console.log('Response data:', res.data);
                     setName(res.data.name || '');
                     setCost(res.data.cost?.toString() || '');
                     setInfo(res.data.info || '');
                     setImage(res.data.image || '');
                 })
-                .catch((e) => {
-                    console.error('Error fetching data:', e);
-                    console.error('Error details:', e.response);
-                    Alert.alert('Ошибка', 'Не удалось загрузить данные');
-                })
+                .catch(() => Alert.alert('Ошибка', 'Не удалось загрузить данные'));
         }
     }, [id]);
 
     const processingRequest = () => {
-        // Валидация
-        if (!name.trim()) {
-            Alert.alert('Ошибка', 'Введите имя');
-            return;
-        }
-
-        if (!cost || isNaN(Number(cost)) || Number(cost) <= 0) {
-            Alert.alert('Ошибка', 'Введите корректный возраст');
-            return;
-        }
-
-                if (!info.trim()) {
-            Alert.alert('Ошибка', 'Введите имя');
-            return;
-        }
-
-                if (!info.trim()) {
-            Alert.alert('Ошибка', 'Введите имя');
+        if (!name.trim() || !cost || !info.trim()) {
+            Alert.alert('Ошибка', 'Заполните все обязательные поля');
             return;
         }
 
@@ -72,102 +44,158 @@ const CreateEditProduct = () => {
             image: image.trim()
         };
 
-        console.log('Sending data:', data);
+        const request = id ? editDataId(id, data) : createData(data);
 
-
-        // Проверяем, что id существует и является числом
-        if (id && !isNaN(id)) {
-            // Редактирование существующей записи
-            editDataId(id, data)
-                .then(() => {
-                    Alert.alert(
-                        'Успешно',
-                        'Данные обновлены',
-                        [
-                            {
-                                text: 'OK',
-                                onPress: () => navigation.goBack()
-                            }
-                        ]
-                    );
-                })
-                .catch((e) => {
-                    console.error('Error updating:', e);
-                    console.error('Error response:', e.response);
-                    Alert.alert('Ошибка', 'Не удалось обновить данные');
-                })
-        } else {
-            // Создание новой записи
-            createData(data)
-                .then(() => {
-                    Alert.alert(
-                        'Успешно',
-                        'Данные созданы',
-                        [
-                            {
-                                text: 'OK',
-                                onPress: () => navigation.goBack()
-                            }
-                        ]
-                    );
-                })
-                .catch((e) => {
-                    console.error('Error creating:', e);
-                    console.error('Error response:', e.response);
-                    Alert.alert('Ошибка', 'Не удалось создать данные');
-                })
-        }
+        request
+            .then(() => {
+                Alert.alert('Успешно', id ? 'Обновлено' : 'Создано', [
+                    { text: 'OK', onPress: () => navigation.goBack() }
+                ]);
+            })
+            .catch(() => Alert.alert('Ошибка', 'Действие не удалось'));
     };
 
-    return <View
-    >
-        <View
-        >
-            {id ? 'Редактировать запись' : 'Создать новую запись'}
-        </View>
-        <View>
-            Имя:
-        </View>
-        <TextInput
-            value={name}
-            onChangeText={setName}
-        />
-        <View>
-            Цена:
-        </View>
-        <TextInput
-            value={cost}
-            onChangeText={setCost}
-            keyboardType="numeric"
-        />
-        <View>
-            Информация:
-        </View>
-        <TextInput
-            value={info}
-            onChangeText={setInfo}
-        >
-        </TextInput>
-        <View>
-            путь к фотографии товара:
-        </View>
-        <TextInput
-            value={image}
-            onChangeText={setImage}
-        ></TextInput>
-        <TouchableOpacity
-            onPress={processingRequest}
-        >
-            {id ? `Редактировать запись` : `Создать новую запись`}
-        </TouchableOpacity>
-                    <TouchableOpacity
-                onPress={() => navigation.goBack()}
+    return (
+        <SafeAreaView style={styles.container}>
+            <KeyboardAvoidingView 
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                style={{ flex: 1 }}
             >
-                <Text>
-                    Назад
-                </Text>
-            </TouchableOpacity>
-    </View>
-}
+                {/* Хедер формы */}
+                <View style={styles.header}>
+                    <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backBtn}>
+                        <ChevronLeft color="#1A1A1A" size={28} />
+                    </TouchableOpacity>
+                    <Text style={styles.headerTitle}>
+                        {id ? 'Редактирование' : 'Новый товар'}
+                    </Text>
+                    <View style={{ width: 28 }} /> 
+                </View>
+
+                <ScrollView contentContainerStyle={styles.form}>
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.label}>Название товара</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Напр: Кроссовки Nike"
+                            value={name}
+                            onChangeText={setName}
+                        />
+                    </View>
+
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.label}>Цена (₽)</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="0"
+                            value={cost}
+                            onChangeText={setCost}
+                            keyboardType="numeric"
+                        />
+                    </View>
+
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.label}>Описание</Text>
+                        <TextInput
+                            style={[styles.input, styles.textArea]}
+                            placeholder="Расскажите о товаре..."
+                            value={info}
+                            onChangeText={setInfo}
+                            multiline
+                            numberOfLines={4}
+                        />
+                    </View>
+
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.label}>Ссылка на фото</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="https://image-url.com..."
+                            value={image}
+                            onChangeText={setImage}
+                        />
+                    </View>
+
+                    <TouchableOpacity style={styles.submitBtn} onPress={processingRequest}>
+                        <Save color="#fff" size={20} style={{ marginRight: 8 }} />
+                        <Text style={styles.submitBtnText}>
+                            {id ? 'Сохранить изменения' : 'Создать товар'}
+                        </Text>
+                    </TouchableOpacity>
+                </ScrollView>
+            </KeyboardAvoidingView>
+        </SafeAreaView>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#fff",
+    },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 16,
+        paddingVertical: 12,
+        borderBottomWidth: 1,
+        borderBottomColor: '#F0F0F0',
+    },
+    headerTitle: {
+        fontSize: 18,
+        fontWeight: '700',
+        color: '#1A1A1A',
+    },
+    backBtn: {
+        padding: 4,
+    },
+    form: {
+        padding: 20,
+    },
+    inputGroup: {
+        marginBottom: 20,
+    },
+    label: {
+        fontSize: 14,
+        fontWeight: '600',
+        color: '#666',
+        marginBottom: 8,
+        marginLeft: 4,
+    },
+    input: {
+        backgroundColor: '#F8F9FA',
+        borderRadius: 12,
+        paddingHorizontal: 16,
+        paddingVertical: 12,
+        fontSize: 16,
+        color: '#1A1A1A',
+        borderWidth: 1,
+        borderColor: '#E9ECEF',
+    },
+    textArea: {
+        height: 100,
+        textAlignVertical: 'top',
+    },
+    submitBtn: {
+        backgroundColor: '#6366f1',
+        flexDirection: 'row',
+        height: 56,
+        borderRadius: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10,
+        shadowColor: "#6366f1",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.2,
+        shadowRadius: 8,
+        elevation: 4,
+    },
+    submitBtnText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '700',
+    },
+});
 
 export default CreateEditProduct;

@@ -2,24 +2,52 @@
     "productsData": [
         {
             "id": 0,
-            "name": "IBANEZ RG-421",
+            "name": "IBANEZ RG-421 MOL",
             "cost": 79000,
-            "info": "Ibanez RG421-MOL шестиструнная электрогитара из линейки RG. Как все гитары этой серии, модель RG421 отличается впечатляющей многофункциональностью. Она позволяет добиться великолепного, очень чёткого и чистого звучания при игре скоростных соло, а также прекрасно подходит для извлечения густых, плотных риффов. При этом цена инструмента весьма демократична. Дека гитары имеет красивую элегантную форму, сделана из красного дерева. Гриф Wizard III - тонкий, низкопрофильный, при этом очень прочный, выполнен из клёна. Мензура 25,5 дюймов (648 миллиметров) даёт широкие возможности для импровизации. Накладка - палисандровая, с инкрустацией классическими белыми точками. Фиксированный бридж надёжно держит строй. Звукосниматели - два мощных пассивных хамбакера Quantum открытого типа c керамическими магнитами. Такие звукосниматели выдают мощные низкие частоты и усиленную середину, четкие и великолепно артикулированные верха. Переключатель - 5-позиционный. Для настройки звука предусмотрены регуляторы громкости и тембра. Представленная модель элегантно выглядит в натуральном цвете красного дерева с матовой отделкой, черными головой и фурнитурой. На гитаре установлены струны толщиной .010 - .046.",
-            "image": "ibanez"
+            "info": "Ibanez RG421-MOL шестиструнная электрогитара из линейки RG. Корпус из красного дерева с матовой отделкой, скоростной гриф Wizard III и хамбакеры Quantum. Идеально для тяжелого рока и скоростных соло.",
+            "image": "https://images.unsplash.com/photo-1564186763535-ebb21ef5277f?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         },
         {
             "id": 1,
-            "name": "IBANEZ GRG-121",
+            "name": "IBANEZ GRG-121 DX",
             "cost": 29000,
-            "info": "",
-            "image": "ibanez2"
+            "info": "Классика для новичка. Корпус из тополя, гриф из клена. Два мощных хамбакера обеспечивают плотный звук, а фиксированный бридж — стабильный строй.",
+            "image": "https://images.unsplash.com/photo-1564186763535-ebb21ef5277f?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         },
         {
             "id": 2,
-            "name": "IBANEZ TEST",
-            "cost": 30000,
-            "info": "",
-            "image": "ibanez3"
+            "name": "IBANEZ AZ2204 Prestige",
+            "cost": 230000,
+            "info": "Японское качество. Гриф из печеного клена, датчики Seymour Duncan Hyperion. Универсальный инструмент для профессиональной студийной работы.",
+            "image": "https://images.unsplash.com/photo-1564186763535-ebb21ef5277f?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        },
+        {
+            "id": 3,
+            "name": "FENDER STRATOCASTER Player",
+            "cost": 115000,
+            "info": "Тот самый легендарный стеклянный звук. Ольховый корпус, три сингла и классическое тремоло. Идеально для блюза, фанка и инди-рока.",
+            "image": "https://images.unsplash.com/photo-1564186763535-ebb21ef5277f?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        },
+        {
+            "id": 4,
+            "name": "GIBSON LES PAUL Standard",
+            "cost": 295000,
+            "info": "Икона рока. Массивный корпус из махагони, бесконечный сустейн и жирный звук хамбакеров Burstbucker. Гитара, создавшая историю музыки.",
+            "image": "https://images.unsplash.com/photo-1564186763535-ebb21ef5277f?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        },
+        {
+            "id": 5,
+            "name": "JACKSON JS32 King V",
+            "cost": 45000,
+            "info": "Агрессивный дизайн для тяжелой сцены. Быстрый гриф с мультирадиусной накладкой и Floyd Rose для экстремальных трюков.",
+            "image": "https://images.unsplash.com/photo-1564186763535-ebb21ef5277f?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        },
+        {
+            "id": 6,
+            "name": "ESP LTD EC-1000 EMG",
+            "cost": 140000,
+            "info": "Профессиональный метал-инструмент. Активные датчики EMG 81/60, запирающие колки и идеальная эргономика. Создана для туров.",
+            "image": "https://images.unsplash.com/photo-1564186763535-ebb21ef5277f?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         }
     ]
 }
